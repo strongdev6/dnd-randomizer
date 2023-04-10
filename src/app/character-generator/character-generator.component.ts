@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {
+  CharacterGeneratorLibraryService
+} from "../../../projects/character-generator-library/src/lib/character-generator-library.service";
 
 
 @Component({
@@ -7,4 +10,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./character-generator.component.scss']
 })
 export class CharacterGeneratorComponent {
+  character: any;
+  constructor(private characterGenerator: CharacterGeneratorLibraryService) {
+    this.character = this.characterGenerator.generateCharacter();
+  }
 }
