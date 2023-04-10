@@ -34,7 +34,7 @@ export class CharacterGeneratorLibraryService {
 
     const abilities: Record<string, number> = {};
     abilityNames.forEach(ability => {
-      abilities[ability] = Math.floor(Math.random() * 18) + 1;
+      abilities[ability] = Math.floor(Math.random() * 11) + 8;
     });
 
     return {
