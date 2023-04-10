@@ -1,39 +1,128 @@
-import {Injectable} from '@angular/core';
+// import {Injectable} from '@angular/core';
+//
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class CharacterGeneratorLibraryService {
+//
+//   constructor() { }
+//
+//   public generateCharacter() {
+//     const race = ['Human', 'Elf', 'Dwarf', 'Halfling', 'Dragonborn', 'Gnome', 'Half-Elf', 'Half-Orc', 'Tiefling'];
+//
+//     const classes = ['Artificer', 'Barbarian', 'Bard', "Blood-Hunter", 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
+//
+//     const abilityNames =['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
+//
+//     const classToHPScale: {[key: string]: number} = {
+//       'Artificer': 8,
+//       'Barbarian': 12,
+//       'Bard': 8,
+//       'Blood-Hunter': 10,
+//       'Cleric': 8,
+//       'Druid': 8,
+//       'Fighter': 10,
+//       'Monk': 8,
+//       'Paladin': 10,
+//       'Ranger': 10,
+//       'Rogue': 8,
+//       'Sorcerer': 6,
+//       'Warlock': 8,
+//       'Wizard': 6
+//     };
+//
+//     const randomRace = race[Math.floor(Math.random() * race.length)];
+//     const randomClass = classes[Math.floor(Math.random() * classes.length)];
+//     const constitution = Math.floor(Math.random() * 18) + 1;
+//
+//     const abilities: Record<string, number> = {};
+//     abilityNames.forEach(ability => {
+//       abilities[ability] = Math.floor(Math.random() * 11) + 8;
+//     });
+//
+//     return {
+//       name: 'Unknown',
+//       race: randomRace,
+//       class: randomClass,
+//       abilities: abilities,
+//       hitPoints: Math.floor(Math.random() * classToHPScale[randomClass]) + constitution
+//     }
+//   }
+// }
+
+import { Injectable } from '@angular/core';
+
+enum Race {
+  Human = 'Human',
+  Elf = 'Elf',
+  Dwarf = 'Dwarf',
+  Halfling = 'Halfling',
+  Dragonborn = 'Dragonborn',
+  Gnome = 'Gnome',
+  HalfElf = 'Half-Elf',
+  HalfOrc = 'Half-Orc',
+  Tiefling = 'Tiefling',
+}
+
+enum Class {
+  Artificer = 'Artificer',
+  Barbarian = 'Barbarian',
+  Bard = 'Bard',
+  BloodHunter = 'Blood-Hunter',
+  Cleric = 'Cleric',
+  Druid = 'Druid',
+  Fighter = 'Fighter',
+  Monk = 'Monk',
+  Paladin = 'Paladin',
+  Ranger = 'Ranger',
+  Rogue = 'Rogue',
+  Sorcerer = 'Sorcerer',
+  Warlock = 'Warlock',
+  Wizard = 'Wizard',
+}
+
+enum Ability {
+  Strength = 'Strength',
+  Dexterity = 'Dexterity',
+  Constitution = 'Constitution',
+  Intelligence = 'Intelligence',
+  Wisdom = 'Wisdom',
+  Charisma = 'Charisma',
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CharacterGeneratorLibraryService {
-
-  constructor() { }
+  constructor() {}
 
   public generateCharacter() {
-    const race = ['Human', 'Elf', 'Dwarf', 'Halfling', 'Dragonborn', 'Gnome', 'Half-Elf', 'Half-Orc', 'Tiefling'];
-    const classes = ['Artificer', 'Barbarian', 'Bard', "Blood-Hunter", 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
-    const abilityNames =['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
-    const classToHPScale: {[key: string]: number} = {
-      'Artificer': 8,
-      'Barbarian': 12,
-      'Bard': 8,
-      'Blood-Hunter': 10,
-      'Cleric': 8,
-      'Druid': 8,
-      'Fighter': 10,
-      'Monk': 8,
-      'Paladin': 10,
-      'Ranger': 10,
-      'Rogue': 8,
-      'Sorcerer': 6,
-      'Warlock': 8,
-      'Wizard': 6
+    const raceValues = Object.values(Race);
+    const classValues = Object.values(Class);
+    const abilityValues = Object.values(Ability);
+
+    const classToHPScale: { [key in Class]: number } = {
+      [Class.Artificer]: 8,
+      [Class.Barbarian]: 12,
+      [Class.Bard]: 8,
+      [Class.BloodHunter]: 10,
+      [Class.Cleric]: 8,
+      [Class.Druid]: 8,
+      [Class.Fighter]: 10,
+      [Class.Monk]: 8,
+      [Class.Paladin]: 10,
+      [Class.Ranger]: 10,
+      [Class.Rogue]: 8,
+      [Class.Sorcerer]: 6,
+      [Class.Warlock]: 8,
+      [Class.Wizard]: 6,
     };
 
-    const randomRace = race[Math.floor(Math.random() * race.length)];
-    const randomClass = classes[Math.floor(Math.random() * classes.length)];
+    const randomRace = raceValues[Math.floor(Math.random() * raceValues.length)];
+    const randomClass = classValues[Math.floor(Math.random() * classValues.length)];
     const constitution = Math.floor(Math.random() * 18) + 1;
-
-    const abilities: Record<string, number> = {};
-    abilityNames.forEach(ability => {
+    const abilities: Record<Ability, number> = {} as Record<Ability, number>;
+    abilityValues.forEach((ability) => {
       abilities[ability] = Math.floor(Math.random() * 11) + 8;
     });
 
@@ -42,7 +131,7 @@ export class CharacterGeneratorLibraryService {
       race: randomRace,
       class: randomClass,
       abilities: abilities,
-      hitPoints: Math.floor(Math.random() * classToHPScale[randomClass]) + constitution
-    }
+      hitPoints: Math.floor(Math.random() * classToHPScale[randomClass]) + constitution,
+    };
   }
 }

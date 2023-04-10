@@ -3,11 +3,11 @@
 <p>Class: {{ character.class }}</p>
 <p>Hit Points: {{ character.hitPoints }}</p>
 <p>Abilities:</p>
-<ul>
-  <li>Strength: {{ character.abilities.Strength }}</li>
-  <li>Dexterity: {{ character.abilities.Dexterity }}</li>
-  <li>Constitution: {{ character.abilities.Constitution }}</li>
-  <li>Intelligence: {{ character.abilities.Intelligence }}</li>
-  <li>Wisdom: {{ character.abilities.Wisdom }}</li>
-  <li>Charisma: {{ character.abilities.Charisma }}</li>
-</ul>
+<mat-list role="list">
+  <mat-list-item role="listitem">Strength: {{ character.abilities.Strength }}</mat-list-item>
+  <mat-list-item role="listitem">Dexterity: {{ character.abilities.Dexterity }}</mat-list-item>
+  <mat-list-item role="listitem">Constitution: {{ character.abilities.Constitution }}</mat-list-item>
+  <mat-list-item role="listitem">Intelligence: {{ character.abilities.Intelligence }}</mat-list-item>
+  <mat-list-item role="listitem">Wisdom: {{ character.abilities.Wisdom }}</mat-list-item>
+  <mat-list-item role="listitem">Charisma: {{ character.abilities.Charisma }}</mat-list-item>
+</mat-list>
