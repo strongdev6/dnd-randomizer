@@ -14,4 +14,7 @@ export class CharacterGeneratorComponent {
   constructor(private characterGenerator: CharacterGeneratorLibraryService) {
     this.character = this.characterGenerator.generateCharacter();
   }
+  generateCharacter() {
+    this.character = this.characterGenerator.generateCharacter();
+  }
 }
