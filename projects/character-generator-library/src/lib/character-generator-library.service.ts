@@ -74,12 +74,27 @@ export class CharacterGeneratorLibraryService {
       abilities[ability] = Math.floor(Math.random() * 11) + 8;
     });
 
+    let constitutionModifier = 0;
+    if (constitution == 8 || constitution == 9) {
+      constitutionModifier = -1;
+    } else if (constitution == 10 || constitution == 11) {
+      constitutionModifier = 0;
+    } else if (constitution == 12 || constitution == 13) {
+      constitutionModifier = 1;
+    } else if (constitution == 14 || constitution == 15) {
+      constitutionModifier = 2;
+    } else if (constitution == 16 || constitution == 17) {
+      constitutionModifier = 3;
+    } else {
+      constitutionModifier = 4;
+    }
+
     return {
       name: 'Unknown',
       race: randomRace,
       class: randomClass,
       abilities: abilities,
-      hitPoints: Math.floor(Math.random() * classToHPScale[randomClass]) + constitution,
+      hitPoints: classToHPScale[randomClass] + constitutionModifier,
     };
   }
 }

@@ -1,20 +1,23 @@
 <div class="container">
-  <button mat-raised-button (click)="generateCharacter()">Generate</button>
   <div *ngIf="character">
     <p>Name: {{ character.name }}</p>
     <p>Race: {{ character.race }}</p>
     <p>Class: {{ character.class }}</p>
     <p>Hit Points: {{ character.hitPoints }}</p>
-    <p>Abilities:</p>
     <mat-list role="list">
-      <mat-list-item role="listitem">Strength: {{ character.abilities.Strength }}</mat-list-item>
-      <mat-list-item role="listitem">Dexterity: {{ character.abilities.Dexterity }}</mat-list-item>
-      <mat-list-item role="listitem">Constitution: {{ character.abilities.Constitution }}</mat-list-item>
-      <mat-list-item role="listitem">Intelligence: {{ character.abilities.Intelligence }}</mat-list-item>
-      <mat-list-item role="listitem">Wisdom: {{ character.abilities.Wisdom }}</mat-list-item>
-      <mat-list-item role="listitem">Charisma: {{ character.abilities.Charisma }}</mat-list-item>
+      <h4>Abilities:</h4>
+      <mat-list-item role="listitem">Strength-{{ character.abilities.Strength }}</mat-list-item>
+      <mat-list-item role="listitem">Dexterity-{{ character.abilities.Dexterity }}</mat-list-item>
+      <mat-list-item role="listitem">Constitution-{{ character.abilities.Constitution }}</mat-list-item>
+      <mat-list-item role="listitem">Intelligence-{{ character.abilities.Intelligence }}</mat-list-item>
+      <mat-list-item role="listitem">Wisdom-{{ character.abilities.Wisdom }}</mat-list-item>
+      <mat-list-item role="listitem">Charisma-{{ character.abilities.Charisma }}</mat-list-item>
     </mat-list>
   </div>
+  <button class="genBtn" (click)="generateCharacter()">Generate</button>
 </div>
+
+
+
 
 

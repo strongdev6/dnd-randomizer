@@ -1,3 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fira Code", monospace;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -6,4 +13,20 @@
   height: 100%;
   width: 100%;
   margin-top: 250px;
+}
+
+.genBtn {
+  margin-top: 20px;
+  color: white;
+  background-color: green;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px #cfc9c8;
+
+}
+
+.genBtn:hover {
+  background-color: white;
+  color: green;
+  cursor: pointer;
 }
