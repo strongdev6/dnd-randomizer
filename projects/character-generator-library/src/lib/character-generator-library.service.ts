@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 enum Race {
   Human = 'Human',
   Elf = 'Elf',
@@ -11,7 +9,6 @@ enum Race {
   HalfOrc = 'Half-Orc',
   Tiefling = 'Tiefling',
 }
-
 enum Class {
   Artificer = 'Artificer',
   Barbarian = 'Barbarian',
@@ -28,7 +25,6 @@ enum Class {
   Warlock = 'Warlock',
   Wizard = 'Wizard',
 }
-
 enum Ability {
   Strength = 'Strength',
   Dexterity = 'Dexterity',
@@ -37,18 +33,24 @@ enum Ability {
   Wisdom = 'Wisdom',
   Charisma = 'Charisma',
 }
-
-@Injectable({
-  providedIn: 'root',
-})
-export class CharacterGeneratorLibraryService {
-  constructor() {}
-
-  public generateCharacter() {
+export interface Abilities {
+  [Ability.Strength]: number;
+  [Ability.Dexterity]: number;
+  [Ability.Constitution]: number;
+  [Ability.Intelligence]: number;
+  [Ability.Wisdom]: number;
+  [Ability.Charisma]: number;
+}
+export interface Character {
+  race: Race,
+  class: Class,
+  abilities: Abilities,
+  hitPoints: number
+}
+  export function generateCharacter(): Character {
     const raceValues = Object.values(Race);
     const classValues = Object.values(Class);
     const abilityValues = Object.values(Ability);
-
     const classToHPScale: { [key in Class]: number } = {
       [Class.Artificer]: 8,
       [Class.Barbarian]: 12,
@@ -65,36 +67,34 @@ export class CharacterGeneratorLibraryService {
       [Class.Warlock]: 8,
       [Class.Wizard]: 6,
     };
-
     const randomRace = raceValues[Math.floor(Math.random() * raceValues.length)];
     const randomClass = classValues[Math.floor(Math.random() * classValues.length)];
-    const constitution = Math.floor(Math.random() * 18) + 1;
     const abilities: Record<Ability, number> = {} as Record<Ability, number>;
     abilityValues.forEach((ability) => {
       abilities[ability] = Math.floor(Math.random() * 11) + 8;
     });
-
-    let constitutionModifier = 0;
-    if (constitution == 8 || constitution == 9) {
-      constitutionModifier = -1;
-    } else if (constitution == 10 || constitution == 11) {
-      constitutionModifier = 0;
-    } else if (constitution == 12 || constitution == 13) {
-      constitutionModifier = 1;
-    } else if (constitution == 14 || constitution == 15) {
-      constitutionModifier = 2;
-    } else if (constitution == 16 || constitution == 17) {
-      constitutionModifier = 3;
-    } else {
-      constitutionModifier = 4;
+    function getConstitutionModifier(x: number) {
+      let constitutionModifier = 0;
+      if (x == 8 || x == 9) {
+        constitutionModifier = -1;
+      } else if (x == 10 || x == 11) {
+        constitutionModifier = 0;
+      } else if (x == 12 || x == 13) {
+        constitutionModifier = 1;
+      } else if (x == 14 || x == 15) {
+        constitutionModifier = 2;
+      } else if (x == 16 || x == 17) {
+        constitutionModifier = 3;
+      } else {
+        constitutionModifier = 4;
+      }
+      return constitutionModifier;
     }
-
     return {
-      name: 'Unknown',
       race: randomRace,
       class: randomClass,
       abilities: abilities,
-      hitPoints: classToHPScale[randomClass] + constitutionModifier,
+      hitPoints: classToHPScale[randomClass] + getConstitutionModifier(abilities.Constitution)
     };
   }
-}
+

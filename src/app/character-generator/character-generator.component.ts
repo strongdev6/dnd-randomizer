@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
-  CharacterGeneratorLibraryService
-} from "../../../projects/character-generator-library/src/lib/character-generator-library.service";
-import { FormControl, FormGroup } from "@angular/forms";
+  Character,
+  generateCharacter
+} from 'projects/character-generator-library/src/lib/character-generator-library.service';
 
 
 @Component({
@@ -12,11 +12,8 @@ import { FormControl, FormGroup } from "@angular/forms";
 })
 export class CharacterGeneratorComponent {
 
-  character: any;
-  constructor(private characterGenerator: CharacterGeneratorLibraryService) {
-    this.character = this.characterGenerator.generateCharacter();
-  }
+  character?: Character;
   generateCharacter() {
-    this.character = this.characterGenerator.generateCharacter();
+    this.character = generateCharacter();
   }
 }
